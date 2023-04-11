@@ -9,7 +9,6 @@ import pandas as pd
 class App:
     def __init__(self):
 
-        self.napis1 = "to jest test"
         self.root = ttkb.Window(themename="flatly")
         self.root.title("Skierowania 0.22")
 
@@ -59,11 +58,13 @@ class App:
 
         # wstaw combobox z wyborem zawodow
 
+        # Set the default value for the combobox to be the first item in the list of values.
         self.combo_current_var = tk.StringVar()
         self.combobox = ttkb.Combobox(
             self.frame, values=self.zawody, textvariable=self.combo_current_var, bootstyle="success")
         self.combobox.grid(row=2, column=0, sticky="nsew",
                            padx=15, pady=15, columnspan=3)
+        self.combobox.set(self.zawody[0])
 
         self.data_wystawienia = ttkb.DateEntry(
             self.frame, firstweekday=0)
@@ -78,12 +79,10 @@ class App:
         self.data_zakonczenia.grid(
             row=5, column=0, sticky="nsew", padx=5, pady=5)
 
-    def set_lista_zawodow_1(self):
+    def set_lista_zawodow_1(self) -> None:
         self.combobox['values'] = list(self.zawody1)
-        # ustaw styl bootstyle na success
-        # self.combobox.configure(bootstyle="success")
 
-    def set_lista_zawodow_2(self):
+    def set_lista_zawodow_2(self) -> None:
         self.combobox['values'] = list(self.zawody2)
 
     def set_lista_zawodow_3(self):
