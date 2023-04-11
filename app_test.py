@@ -10,11 +10,9 @@ class App:
     def __init__(self):
 
         self.napis1 = "to jest test"
-
-        # self.root = tk.Tk()
         self.root = ttkb.Window(themename="flatly")
         self.root.title("Skierowania 0.22")
-        # self.root.geometry("300x300")
+
         self.root.grid()
         self.root.columnconfigure(0, weight=1)
         self.root.columnconfigure(1, weight=1)
@@ -48,64 +46,52 @@ class App:
         self.radio1.grid(row=1, column=0, sticky="nsew", padx=5, pady=5)
         self.radio2.grid(row=1, column=1, sticky="nsew", padx=5, pady=5)
         self.radio3.grid(row=1, column=2, sticky="nsew", padx=5, pady=5)
-        # self.radio1.invoke()
 
         self.radiobuttons = []
         self.lista_zawodow = StringVar()
 
-        self.zawody1 = ('Sprzedawca',
-                        'cukiernik',
-                        'Konserwator')
-
-        self.zawody2 = ('Sprzedawca',
-                        'cukiernik',
-                        'Konserwator')
-
-        self.zawody3 = ('Sprzedawca',
-                        'cukiernik',
-                        'Konserwator')
+        self.zawody = ('Sprzedawca',
+                       'cukiernik',
+                       'Konserwator')
 
         self.frame2 = ttkb.Frame(self.root, bootstyle="success")
         self.frame2.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
 
-        self.label1 = ttkb.Label(
-            self.frame2, text="lajkshfkjahskjfhaksjhfkjahs fkjahs kfjha skjf")
-        self.label1.grid(row=0, column=0)
+        # wstaw combobox z wyborem zawodow
 
-    def ble(self):
-        self.button.configure(text=self.napis1)
+        self.combo_current_var = tk.StringVar()
+        self.combobox = ttkb.Combobox(
+            self.frame, values=self.zawody, textvariable=self.combo_current_var, bootstyle="success")
+        self.combobox.grid(row=2, column=0, sticky="nsew",
+                           padx=15, pady=15, columnspan=3)
+
+        self.data_wystawienia = ttkb.DateEntry(
+            self.frame, firstweekday=0)
+        self.data_wystawienia.grid(
+            row=3, column=0, sticky="nsew", padx=5, pady=5)
+        self.data_rozpoczecia = ttkb.DateEntry(
+            self.frame)
+        self.data_rozpoczecia.grid(
+            row=4, column=0, sticky="nsew", padx=5, pady=5)
+        self.data_zakonczenia = ttkb.DateEntry(
+            self.frame)
+        self.data_zakonczenia.grid(
+            row=5, column=0, sticky="nsew", padx=5, pady=5)
 
     def set_lista_zawodow_1(self):
-        for a in self.radiobuttons:
-            a.grid_forget()
-        for zawod in self.zawody1:
-            self.r = ttkb.Radiobutton(
-                self.frame, text=zawod, value=zawod, variable=self.lista_zawodow, bootstyle="success-outline-toolbutton")
-            self.r.grid(padx=5, pady=5, sticky="nsew", columnspan=3)
-            self.radiobuttons.append(self.r)
+        self.combobox['values'] = list(self.zawody1)
+        # ustaw styl bootstyle na success
+        # self.combobox.configure(bootstyle="success")
 
     def set_lista_zawodow_2(self):
-        for b in self.radiobuttons:
-            b.grid_forget()
-
-        for zawod in self.zawody2:
-            self.r = ttkb.Radiobutton(
-                self.frame, text=zawod, value=zawod, variable=self.lista_zawodow, bootstyle="warning-outline-toolbutton")
-            self.r.grid(padx=5, pady=5, sticky="nsew", columnspan=3)
-            self.radiobuttons.append(self.r)
+        self.combobox['values'] = list(self.zawody2)
 
     def set_lista_zawodow_3(self):
-        for c in self.radiobuttons:
-            c.grid_forget()
-        for zawod in self.zawody3:
-            self.r = ttkb.Radiobutton(
-                self.frame, text=zawod, value=zawod, variable=self.lista_zawodow, bootstyle="danger-outline-toolbutton")
-            self.r.grid(padx=5, pady=5, sticky="nsew", columnspan=3)
-            self.radiobuttons.append(self.r)
+        self.combobox['values'] = list(self.zawody3)
 
     def utworz_lz(self):
         df = pd.read_excel(self.plik)
-        print(df.head)
+        # print(df.head)
 
         # Ekstrakcja liczby z kolumny 'Dane oddziału'
         df['Oddział'] = df['Dane oddziału'].str.extract(
@@ -120,8 +106,6 @@ class App:
                            ['Specjalność/Zawód'].tolist())
 
         print(self.zawody1)
-        print(self.zawody2)
-        print(self.zawody3)
 
     def otwarcie_pliku(self):
         filetypes = (
@@ -135,6 +119,7 @@ class App:
 
         self.btn_wyb_plik.configure(text=self.plik)
         self.utworz_lz()
+        self.radio1.invoke()
 
 
 if __name__ == "__main__":
