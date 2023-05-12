@@ -17,7 +17,7 @@ class App:
         
 
         self.root = ttkb.Window(themename="darkly")
-        self.root.title("Skierowania 0.22")
+        self.root.title("Skierowania 0.23")
 
         self.root.grid()
         self.root.columnconfigure(0, weight=0, minsize=500)
@@ -102,8 +102,7 @@ class App:
         
         self.lab_data_rozpoczecia = ttkb.Label(self.frame, text="Data rozpoczęcia")
         self.lab_data_rozpoczecia.grid(row=4, column=0, sticky="nsew", padx=5, pady=5)
-        
-        
+          
         self.data_rozpoczecia = ttkb.DateEntry(
             self.frame)
         self.data_rozpoczecia.grid(
@@ -117,9 +116,6 @@ class App:
             self.frame)
         self.data_zakonczenia.grid(
             row=5, column=1, sticky="nsew", padx=5, pady=5, columnspan=2)
-        
-
-
 
         self.label_godzina_rozpoczecia = ttkb.Label(self.frame, text="Godzina rozpoczęcia")
         self.label_godzina_rozpoczecia.grid(row=6, column=0, sticky="nsew", padx=5, pady=5)
@@ -134,10 +130,6 @@ class App:
         self.minuty_rozpoczecia.grid(row=6, column=2, sticky="nsew", padx=5, pady=5)
         self.minuty_rozpoczecia.insert(0, "00")
 
-        # self.btn_test = ttkb.Button(self.frame, text="Test", bootstyle="info", command=self.test)
-        # self.btn_test.grid(row=7, column=0, sticky="nsew", padx=5, pady=5, columnspan=3)
-
-        #add 4 buttons
         self.btn_utworz_wykaz = ttkb.Button(self.frame, text="Utwórz wykaz", bootstyle="success", command=self.utworz_wykaz)
         self.btn_utworz_wykaz.grid(row=7, column=0, sticky="nsew", padx=5, pady=5)
 
@@ -154,25 +146,13 @@ class App:
         self.wynik = ttkb.Label(self.frame, text="Wynik", bootstyle="inverse-dark")
         self.wynik.grid(row=9, column=0, sticky="sew", padx=5, pady=5, columnspan=3)
         
-        
         # self.separator = ttkb.Separator(self.frame, orient="horizontal", bootstyle="success")
         # self.separator.grid(row=9, column=0, sticky="sew", padx=5, pady=5, columnspan=3)
-
-
 
         # frame2 - przyciski
         self.pole_tekstowe = tk.Text(self.frame2)
         self.pole_tekstowe.grid(row=0, column=0,  padx=1, pady=1, sticky="nsew")
         
-
-
-
-
-
-
-
-
-
 
     def set_lista_zawodow_1(self) -> None:
         self.combobox['values'] = list(self.zawody1)
@@ -248,16 +228,6 @@ class App:
         self.pole_tekstowe.delete(1.0, tk.END)
         self.pole_tekstowe.insert(tk.END, "Nie wybrano pliku")
 
-    
-    def test(self):
-        print("działamy")
-        self.wypisanie_osob()
-        # self.pole_tekstowe.delete(1.0, tk.END)
-        # self.pole_tekstowe.insert(tk.END, self.var.get())  
-
-        # self.pole_tekstowe.insert(tk.END, self.data_rozpoczecia.entry.get())
-        # self.pole_tekstowe.insert(tk.END, self.combobox.get())
-
 
     def symbolZawodu(self, specjalnosc) -> str:
 
@@ -279,31 +249,23 @@ class App:
             'Magazynier-logistyk': '432106',
             '': 'N/A'
         }
-        return zawody_dict[specjalnosc]
-
-
+        # return zawody_dict[specjalnosc]
+        return zawody_dict.get(specjalnosc, 'N/A')
 
     def utworz_wykaz(self):
         
-        szablon = "Szablony\\szablon.docx"
-        szablonWykaz = "Szablony\\szablonWykaz.docx"
-        tmp = "Szablony\\output1.docx"
-        domyslnyplik = "..\\Data\\WydrukiListXls.xlsx"
+        szablon = "Szablony/szablon.docx"
+        szablonWykaz = "Szablony/szablonWykaz.docx"
+        tmp = "Szablony/output1.docx"
+        domyslnyplik = "../Data/WydrukiListXls.xlsx"
 
         # wstawianie listy uczniów na końcu dokumentu
         
         docTempl = docx.Document(szablonWykaz)
         dfw = pd.read_excel(open(self.plik, "rb"), dtype={'PESEL': str})
-        # filtered_dfw = dfw[dfw["Dane oddziału"].str.contains(daneOddzialu(pole_dane_oddzialu
-        #                                                                 ), case=False) & dfw['Specjalność/Zawód'].str.contains(lista_specjalnosci.get(), case=False)]
-
-        
+ 
         filtered_dfw = dfw[dfw["Dane oddziału"].str.contains(self.var.get(), case=False) & dfw['Specjalność/Zawód'].str.contains(self.combobox.get(), case=False)]
 
-        
-        
-        
-        
         
         for linia in range(filtered_dfw.shape[0]):
             rekord = filtered_dfw.iloc[linia].to_dict()
@@ -342,24 +304,18 @@ class App:
                 'dataRozp': self.data_rozpoczecia.entry.get(),
                 'dataZako': self.data_zakonczenia.entry.get(),
                 'godzRozp': self.godzina_rozpoczecia.get()+":"+self.minuty_rozpoczecia.get(),
-                'PESEL': rekord['PESEL'],
                 'stopien': self.var.get()
                 }
         
-
-
-
-
-
         # renderowane dokumentu (podstawianie danych ze słownika)
         szablon.render(context)
 
-        if not os.path.exists("..\\Data\\Wykazy"):
-            os.mkdir("..\\Data\\Wykazy")
+        if not os.path.exists("../Data/Wykazy"):
+            os.mkdir("../Data/Wykazy")
 
         # zapisywanie dokumentu
-        szablon.save("..\\Data\\Wykazy\\"+rekord['Dane oddziału'] +
-                    rekord['Specjalność/Zawód'] + ".docx")
+        
+        szablon.save(f"../Data/Wykazy/{rekord['Dane oddziału']}{rekord['Specjalność/Zawód']}.docx")
 
         # informacja zwrotna
 
@@ -367,39 +323,16 @@ class App:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     def utworz_skierowania(self):
-        szablon = "Szablony\\szablon.docx"
-        szablonWykaz = "Szablony\\szablonWykaz.docx"
-        tmp = "Szablony\\output1.docx"
-        domyslnyplik = "..\\Data\\WydrukiListXls.xlsx"
+        szablon = "Szablony/szablon.docx"
+        szablonWykaz = "Szablony/szablonWykaz.docx"
+        tmp = "Szablony/output1.docx"
+        domyslnyplik = "../Data/WydrukiListXls.xlsx"
 
         # Otwórz plik xlsx
         df = pd.read_excel(open(self.plik, "rb"), dtype={'PESEL': str})
 
         filtered_df = df[df["Dane oddziału"].str.contains(self.var.get(), case=False) & df['Specjalność/Zawód'].str.contains(self.combobox.get(), case=False)]
-
-
-
 
 
         # .shape zwraca tupla wiersze, kolumny
@@ -419,7 +352,6 @@ class App:
                     'dataRozp': self.data_rozpoczecia.entry.get(),
                     'dataZako': self.data_zakonczenia.entry.get(),
                     'godzRozp': self.godzina_rozpoczecia.get()+":"+self.minuty_rozpoczecia.get(),
-                    'PESEL': rekord['PESEL'],
                     'stopien': self.var.get()
                     }
 
@@ -428,11 +360,11 @@ class App:
             # renderowane dokumentu (podstawianie danych ze słownika)
             doc.render(context)
 
-            if not os.path.exists("..\\Data\\Skierowania"):
-                os.mkdir("..\\Data\\Skierowania")
+            if not os.path.exists("../Data/Skierowania"):
+                os.mkdir("../Data/Skierowania")
 
             # zapisywanie dokumentu
-            doc.save("..\\Data\\Skierowania\\"+rekord['Dane oddziału']+rekord['Specjalność/Zawód'] +
+            doc.save("../Data/Skierowania/"+rekord['Dane oddziału']+rekord['Specjalność/Zawód'] +
                     rekord['Imię']+rekord['Nazwisko'] + ".docx")
 
             # informacja zwrotna
@@ -441,15 +373,23 @@ class App:
 
 
 
-
-
     def otworz_folder_wykaz(self):
-        path = r"..\Data\Wykazy"
-        subprocess.Popen(f'explorer "{path}"')
+        folder_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Data', 'Wykazy'))
+        subprocess.Popen(f'explorer "{folder_path}"')
+
 
     def otworz_folder_skierowania(self):
-        path = r"..\Data\Skierowania"
-        subprocess.Popen(f'explorer "{path}"')
+        folder_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Data', 'Skierowania'))
+        subprocess.Popen(f'explorer "{folder_path}"')
+
+    ### tak to było wcześniej
+    # def otworz_folder_wykaz(self):
+    #     path = r"..\Data\Wykazy"
+    #     subprocess.Popen(f'explorer "{path}"')
+
+    # def otworz_folder_skierowania(self):
+    #     path = r"..\Data\Skierowania"
+    #     subprocess.Popen(f'explorer "{path}"')
 
 
 
