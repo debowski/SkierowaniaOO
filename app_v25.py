@@ -8,13 +8,14 @@ from tkinter import filedialog
 import pandas as pd
 from docxtpl import DocxTemplate
 import docx
+from docx2pdf import convert
 
 
 class App:
 
     def __init__(self):
         self.root = ttkb.Window(themename="darkly")
-        self.root.title("Skierowania 0.24")
+        self.root.title("Skierowania 0.25")
         self.root.grid()
         self.root.columnconfigure(0, weight=0, minsize=500)
         self.root.columnconfigure(1, weight=1, minsize=400)
@@ -132,20 +133,30 @@ class App:
         self.btn_utworz_wykaz.grid(
             row=7, column=0, sticky="nsew", padx=5, pady=5)
 
+        self.btn_utworz_wykaz_pdf = ttkb.Button(
+            self.frame, text="Konwersja do PDF", bootstyle="info", command=self.utworz_wykaz_pdf)
+        self.btn_utworz_wykaz_pdf.grid(
+            row=7, column=1, sticky="nsew", padx=5, pady=5)
+
         self.btn_otworz_folder_wykaz = ttkb.Button(
             self.frame, text="Otwórz folder wykaz", command=self.otworz_folder_wykaz)
         self.btn_otworz_folder_wykaz.grid(
-            row=7, column=1, sticky="nsew", padx=5, pady=5, columnspan=2)
+            row=7, column=2, sticky="nsew", padx=5, pady=5, columnspan=1)
 
         self.btn_utworz_skierowania = ttkb.Button(
             self.frame, text="Utwórz skierowania", bootstyle="success", command=self.utworz_skierowania)
         self.btn_utworz_skierowania.grid(
             row=8, column=0, sticky="nsew", padx=5, pady=5)
 
+        self.btn_utworz_skierowania_pdf = ttkb.Button(
+            self.frame, text="Konwersja do PDF", bootstyle="info", command=self.utworz_skierowania_pdf)
+        self.btn_utworz_skierowania_pdf.grid(
+            row=8, column=1, sticky="nsew", padx=5, pady=5)
+
         self.btn_otworz_folder_skierowania = ttkb.Button(
             self.frame, text="Otwórz folder skierowania", command=self.otworz_folder_skierowania)
         self.btn_otworz_folder_skierowania.grid(
-            row=8, column=1, sticky="nsew", padx=5, pady=5, columnspan=2)
+            row=8, column=2, sticky="nsew", padx=5, pady=5, columnspan=1)
 
         self.wynik = ttkb.Label(self.frame, text="Wynik",
                                 bootstyle="inverse-dark")
@@ -324,12 +335,20 @@ class App:
 
         self.wynik.configure(text=f"utworzono: {str(linia + 1)} pozycji")
 
+    def utworz_wykaz_pdf(self):
+        folder_path = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), '..', 'Data', 'Wykazy'))
+        convert(folder_path)
+
     def utworz_skierowania(self):
         szablon = "Szablony/szablon_skierowanie.docx"
         # tmp = "Szablony/output1.docx"
 
         # Otwórz plik xlsx
-        df = pd.read_excel(open(self.plik, "rb"), dtype={'PESEL': str})
+        df = pd.read_excel(open(self.plik, "rb"), dtype={
+                           'PESEL': str, 'Data urodzenia': str})
+        df['Data urodzenia'] = pd.to_datetime(
+            df['Data urodzenia']).dt.strftime('%d.%m.%Y')
 
         filtered_df = df[df["Dane oddziału"].str.contains(self.var.get(
         ), case=False) & df['Specjalność/Zawód'].str.contains(self.combobox.get(), case=False)]
@@ -373,6 +392,11 @@ class App:
             self.wynik.configure(
                 text=f"utworzono: {str(linia + 1)} dokumentów")
 
+    def utworz_skierowania_pdf(self):
+        folder_path = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), '..', 'Data', 'Skierowania'))
+        convert(folder_path)
+
     def otworz_folder_wykaz(self):
         folder_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '..', 'Data', 'Wykazy'))
@@ -386,7 +410,7 @@ class App:
     def credits(self):
         self.pole_tekstowe.delete(1.0, tk.END)
         self.pole_tekstowe.insert(
-            tk.END, "Autor: Pioitr Dębowski\nZespół Szkół Energetycznych i Usługowych w Łaziskch Górnych\n\nWersja 0.24\n\n")
+            tk.END, "Autor: Piotr Dębowski\nZespół Szkół Energetycznych i Usługowych w Łaziskch Górnych\n\nWersja 0.25\n\n")
 
 
 if __name__ == "__main__":
