@@ -1,3 +1,4 @@
+import os
 import subprocess
 import tkinter as tk
 import tkinter.ttk as ttk
@@ -6,25 +7,22 @@ from tkinter import StringVar
 from tkinter import filedialog
 import pandas as pd
 from docxtpl import DocxTemplate
-
 import docx
-import os
+
+
 
 class App:
 
     def __init__(self):
-
-        
-
         self.root = ttkb.Window(themename="darkly")
         self.root.title("Skierowania 0.23")
-
         self.root.grid()
         self.root.columnconfigure(0, weight=0, minsize=500)
         self.root.columnconfigure(1, weight=1, minsize=400)
         self.root.rowconfigure(0, weight=1)
-
         self.dodaj_widzety()
+
+
 
     def dodaj_widzety(self):
         self.frame = ttkb.Frame(self.root)
@@ -153,7 +151,6 @@ class App:
         self.pole_tekstowe = tk.Text(self.frame2)
         self.pole_tekstowe.grid(row=0, column=0,  padx=1, pady=1, sticky="nsew")
         
-
     def set_lista_zawodow_1(self) -> None:
         self.combobox['values'] = list(self.zawody1)
         self.wypisanie_osob()
@@ -162,7 +159,7 @@ class App:
         self.combobox['values'] = list(self.zawody2)
         self.wypisanie_osob()
 
-    def set_lista_zawodow_3(self):
+    def set_lista_zawodow_3(self) -> None:
         self.combobox['values'] = list(self.zawody3)
         self.wypisanie_osob()
 
@@ -182,8 +179,6 @@ class App:
         self.zawody3 = set(df[df['Oddział'] == 3]
                            ['Specjalność/Zawód'].tolist())
 
-        print(self.zawody1)
-
     def otwarcie_pliku(self):
         filetypes = (
             ('Arkusze', '*.xlsx'),
@@ -197,7 +192,6 @@ class App:
         self.btn_wyb_plik.configure(text=self.plik)
         self.utworz_lz()
         self.radio1.invoke()
-
     
     def wypisanie_osob(self, event=None):
 
@@ -222,12 +216,10 @@ class App:
             # wstawianie listy uczniów do ramki prawej
             self.pole_tekstowe.delete(1.0, tk.END)
             self.pole_tekstowe.insert(tk.END, tekst)
-        
-
+     
     def brak_pliku(self):
         self.pole_tekstowe.delete(1.0, tk.END)
         self.pole_tekstowe.insert(tk.END, "Nie wybrano pliku")
-
 
     def symbolZawodu(self, specjalnosc) -> str:
 
@@ -254,12 +246,8 @@ class App:
         return zawody_dict.get(specjalnosc, 'N/A')
 
     def utworz_wykaz(self):
-        
-        szablon = "Szablony/szablon.docx"
         szablonWykaz = "Szablony/szablonWykaz.docx"
         tmp = "Szablony/output1.docx"
-        domyslnyplik = "../Data/WydrukiListXls.xlsx"
-
         # wstawianie listy uczniów na końcu dokumentu
         
         docTempl = docx.Document(szablonWykaz)
@@ -322,13 +310,9 @@ class App:
 
         self.wynik.configure(text=f"utworzono: {str(linia + 1)} pozycji")
 
-
-
     def utworz_skierowania(self):
         szablon = "Szablony/szablon.docx"
-        szablonWykaz = "Szablony/szablonWykaz.docx"
-        tmp = "Szablony/output1.docx"
-        domyslnyplik = "../Data/WydrukiListXls.xlsx"
+        # tmp = "Szablony/output1.docx"
 
         # Otwórz plik xlsx
         df = pd.read_excel(open(self.plik, "rb"), dtype={'PESEL': str})
@@ -371,27 +355,13 @@ class App:
             # informacja zwrotna
             self.wynik.configure(text=f"utworzono: {str(linia + 1)} dokumentów")
 
-
-
-
     def otworz_folder_wykaz(self):
         folder_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Data', 'Wykazy'))
         subprocess.Popen(f'explorer "{folder_path}"')
 
-
     def otworz_folder_skierowania(self):
         folder_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Data', 'Skierowania'))
         subprocess.Popen(f'explorer "{folder_path}"')
-
-    ### tak to było wcześniej
-    # def otworz_folder_wykaz(self):
-    #     path = r"..\Data\Wykazy"
-    #     subprocess.Popen(f'explorer "{path}"')
-
-    # def otworz_folder_skierowania(self):
-    #     path = r"..\Data\Skierowania"
-    #     subprocess.Popen(f'explorer "{path}"')
-
 
 
 if __name__ == "__main__":
