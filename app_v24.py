@@ -15,7 +15,7 @@ class App:
 
     def __init__(self):
         self.root = ttkb.Window(themename="darkly")
-        self.root.title("Skierowania 0.23")
+        self.root.title("Skierowania 0.24")
         self.root.grid()
         self.root.columnconfigure(0, weight=0, minsize=500)
         self.root.columnconfigure(1, weight=1, minsize=400)
