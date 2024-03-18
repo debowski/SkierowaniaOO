@@ -239,6 +239,9 @@ class App:
             ('All files', '*.*')
         )
 
+
+        print(os.getcwd())  
+
         self.plik = filedialog.askopenfilename(title='Wybierz plik',
                                                initialdir='..\\Data',
                                                filetypes=filetypes)
