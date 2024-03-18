@@ -50,11 +50,11 @@ class App:
         self.var = StringVar()
 
         self.radio1 = ttkb.Radiobutton(
-            self.frame, text="Klasa 1", variable=self.var, value="1", bootstyle="success-outline-toolbutton", command=self.set_lista_zawodow_1)
+            self.frame, text="Klasa 1", variable=self.var, value="1", bootstyle="info-outline-toolbutton", command=self.set_lista_zawodow_1)
         self.radio2 = ttkb.Radiobutton(
-            self.frame, text="Klasa 2", variable=self.var, value="2", bootstyle="warning-outline-toolbutton", command=self.set_lista_zawodow_2)
+            self.frame, text="Klasa 2", variable=self.var, value="2", bootstyle="info-outline-toolbutton", command=self.set_lista_zawodow_2)
         self.radio3 = ttkb.Radiobutton(
-            self.frame, text="Klasa 3", variable=self.var, value="3", bootstyle="danger-outline-toolbutton", command=self.set_lista_zawodow_3)
+            self.frame, text="Klasa 3", variable=self.var, value="3", bootstyle="info-outline-toolbutton", command=self.set_lista_zawodow_3)
         self.radio1.grid(row=1, column=0, sticky="nsew", padx=5, pady=5)
         self.radio2.grid(row=1, column=1, sticky="nsew", padx=5, pady=5)
         self.radio3.grid(row=1, column=2, sticky="nsew", padx=5, pady=5)
@@ -210,11 +210,19 @@ class App:
             if set(expected_columns).issubset(set(columns)):
                 print("Plik ma poprawną strukturę kolumn.") 
                 self.btn_wyb_plik.configure(bootstyle="success")                 
+                self.btn_utworz_wykaz.configure(state="normal")
+                self.btn_utworz_skierowania.configure(state="normal")
+
+
 
                 return True
             else:
                 self.btn_wyb_plik.configure(text="Niepoprawne dane")
                 self.btn_wyb_plik.configure(bootstyle="danger")
+
+                self.btn_utworz_wykaz.configure(state="disabled")
+                self.btn_utworz_skierowania.configure(state="disabled")
+
                 print("Plik nie zawiera wszystkich oczekiwanych kolumn.")
 
 
@@ -311,7 +319,22 @@ class App:
         # wstawianie listy uczniów na końcu dokumentu
 
         docTempl = docx.Document(szablonWykaz)
-        dfw = pd.read_excel(open(self.plik, "rb"), dtype={'PESEL': str})
+
+        try:
+            dfw = pd.read_excel(open(self.plik, "rb"), dtype={'PESEL': str})
+            self.wynik.configure(bootstyle="success")
+
+        except Exception as e:
+
+            self.wynik.configure(text=f"Nie wyczytano poprawnyc danych")
+            self.wynik.configure(bootstyle="danger")
+
+            return  # Zakończ funkcję, gdy dane nie zostały wczytane poprawnie
+        
+        if dfw.empty:
+            print("Plik nie zawiera danych.")
+            # Tutaj możesz dodać obsługę braku danych, np. wyświetlić komunikat użytkownikowi
+            return  # Zakończ funkcję, gdy brak danych
 
         filtered_dfw = dfw[dfw["Dane oddziału"].str.contains(self.var.get(
         ), case=False) & dfw['Specjalność/Zawód'].str.contains(self.combobox.get(), case=False)]
@@ -397,10 +420,35 @@ class App:
         # tmp = "Szablony/output1.docx"
 
         # Otwórz plik xlsx
-        df = pd.read_excel(open(self.plik, "rb"), dtype={
+
+
+        try:
+            df = pd.read_excel(open(self.plik, "rb"), dtype={
                            'PESEL': str, 'Data urodzenia': str})
+            self.wynik.configure(bootstyle="success")
+
+        except Exception as e:
+
+            self.wynik.configure(text=f"Nie wyczytano poprawnyc danych")
+            self.wynik.configure(bootstyle="danger")
+
+            return  # Zakończ funkcję, gdy dane nie zostały wczytane poprawnie
+        
+        if df.empty:
+            print("Plik nie zawiera danych.")
+            # Tutaj możesz dodać obsługę braku danych, np. wyświetlić komunikat użytkownikowi
+            return  # Zakończ funkcję, gdy brak danych        
+        
+        
+        
         # df['Data urodzenia'] = pd.to_datetime(
         #     df['Data urodzenia']).dt.strftime('%d.%m.%Y')
+
+
+
+
+
+
 
         filtered_df = df[df["Dane oddziału"].str.contains(self.var.get(
         ), case=False) & df['Specjalność/Zawód'].str.contains(self.combobox.get(), case=False)]
