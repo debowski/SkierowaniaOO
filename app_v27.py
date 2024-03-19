@@ -295,23 +295,113 @@ class App:
     def symbolZawodu(self, specjalnosc) -> str:
 
         zawody_dict = {
-            'Cukiernik': '751201',
-            'Fryzjer': '514101',
-            'Sprzedawca': '522301',
-            'Mechanik pojazdów samochodowych': '723103',
-            'Kucharz': '512001',
-            'Blacharz samochodowy': '721306',
-            'Piekarz': '751204',
-            'Stolarz': '752205',
-            'Lakiernik': '713201',
-            'Monter sieci, instalacji i urządzeń sanitarnych': '712616',
-            'Elektromechanik pojazdów samochodowych': '741203',
-            'Elektryk': '741103',
-            'Monter zabudowy i robót wykończeniowych w budownictwie': '712905',
-            'Mechanik-monter maszyn i urządzeń': '723310',
-            'Magazynier-logistyk': '432106',
-            'Lakiernik samochodowy': '713203',
-            '': 'N/A'
+            "Administrator produkcji filmowej i telewizyjnej (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)": "343919",
+            "Animator rynku książki (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)": "343305",
+            "Asystent kierownika produkcji filmowej i telewizyjnej": "343902",
+            "Asystent osoby niepełnosprawnej": "341201",
+            "Asystentka stomatologiczna": "325101",
+            "Automatyk": "731107",
+            "Betoniarz-zbrojarz": "711402",
+            "Blacharz": "721301",
+            "Blacharz samochodowy": "721306",
+            "Cieśla": "711501",
+            "Cukiernik": "751201",
+            "Dekarz": "712101",
+            "Drukarz fleksograficzny": "732209",
+            "Drukarz offsetowy": "732210",
+            "Elektromechanik": "741201",
+            "Elektromechanik pojazdów samochodowych": "741203",
+            "Elektronik": "742117",
+            "Elektryk": "741103",
+            "Florysta": "343203",
+            "Fotograf": "343101",
+            "Fryzjer": "514101",
+            "Garbarz skór": "753501",
+            "Górnik eksploatacji otworowej": "811301",
+            "Górnik eksploatacji podziemnej": "811101",
+            "Górnik odkrywkowej eksploatacji złóż": "811102",
+            "Górnik podziemnej eksploatacji kopalin innych niż węgiel kamienny": "811112",
+            "Higienistka stomatologiczna": "325102",
+            "Jeździec": "516408",
+            "Kaletnik": "753702",
+            "Kamieniarz": "711301",
+            "Kelner": "513101",
+            "Kierowca mechanik": "832201",
+            "Kominiarz": "713303",
+            "Koszykarz-plecionkarz": "731702",
+            "Kowal": "722101",
+            "Krawiec": "753105",
+            "Kucharz": "512001",
+            "Kuśnierz": "753106",
+            "Lakiernik samochodowy": "713203",
+            "Magazynier-logistyk": "432106",
+            "Mechanik motocyklowy": "723107",
+            "Mechanik pojazdów kolejowych (Opracowano na podstawie dokumentu z dnia 9 kwietnia 2020 r.)": "723318",
+            "Mechanik pojazdów samochodowych": "723103",
+            "Mechanik precyzyjny": "731103",
+            "Mechanik-monter maszyn i urządzeń": "723310",
+            "Mechanik-operator maszyn do produkcji drzewnej": "817212",
+            "Mechanik-operator pojazdów i maszyn rolniczych": "834103",
+            "Modelarz odlewniczy": "721104",
+            "Monter budownictwa wodnego": "711701",
+            "Monter izolacji budowlanych": "712401",
+            "Monter izolacji przemysłowych": "712403",
+            "Monter jachtów i łodzi": "711505",
+            "Monter kadłubów jednostek pływających": "721406",
+            "Monter konstrukcji budowlanych": "711102",
+            "Monter nawierzchni kolejowej": "711603",
+            "Monter sieci i instalacji sanitarnych": "712618",
+            "Monter sieci i urządzeń telekomunikacyjnych": "742202",
+            "Monter stolarki budowlanej": "712906",
+            "Monter systemów rurociągowych": "712613",
+            "Monter zabudowy i robót wykończeniowych w budownictwie": "712905",
+            "Murarz-tynkarz": "711204",
+            "Obuwnik": "753602",
+            "Ogrodnik": "611303",
+            "Operator maszyn i urządzeń do przetwórstwa tworzyw sztucznych": "814209",
+            "Operator maszyn i urządzeń do robót ziemnych i drogowych": "834209",
+            "Operator maszyn i urządzeń odlewniczych": "812107",
+            "Operator maszyn i urządzeń przemysłu drzewnego (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)": "817213",
+            "Operator maszyn i urządzeń przemysłu spożywczego": "816003",
+            "Operator maszyn i urządzeń przeróbczych": "811205",
+            "Operator maszyn i urządzeń w gospodarce odpadami (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)": "313211",
+            "Operator maszyn leśnych": "834105",
+            "Operator maszyn w przemyśle włókienniczym": "815204",
+            "Operator obrabiarek skrawających": "722307",
+            "Operator procesów introligatorskich": "732305",
+            "Operator urządzeń przemysłu ceramicznego": "818115",
+            "Operator urządzeń przemysłu chemicznego": "813134",
+            "Operator urządzeń przemysłu szklarskiego": "818116",
+            "Opiekun medyczny": "532102",
+            "Opiekun osoby starszej": "341202",
+            "Opiekun w domu pomocy społecznej": "341203",
+            "Opiekunka dziecięca": "325905",
+            "Opiekunka środowiskowa": "341204",
+            "Optyk-mechanik": "731104",
+            "Ortoptystka": "325906",
+            "Piekarz": "751204",
+            "Podolog (opracowano na podstawie dokumentu z dnia 18 czerwca 2021 r.)": "323014",
+            "Pracownik obsługi hotelowej": "962907",
+            "Pracownik pomocniczy fryzjera": "932920",
+            "Pracownik pomocniczy gastronomii": "941203",
+            "Pracownik pomocniczy krawca": "932915",
+            "Pracownik pomocniczy mechanika": "932916",
+            "Pracownik pomocniczy obsługi hotelowej": "911205",
+            "Pracownik pomocniczy stolarza": "932918",
+            "Pracownik pomocniczy ślusarza": "932917",
+            "Pracownik pomocniczy w gospodarce odpadami (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)": "932922",
+            "Protetyk słuchu": "321401",
+            "Przetwórca mięsa": "751108",
+            "Przetwórca ryb": "751103",
+            "Pszczelarz": "612302",
+            "Rękodzielnik wyrobów włókienniczych": "731808",
+            "Rolnik": "613003",
+            "Rybak śródlądowy": "622201",
+            "Sprzedawca": "522301",
+            "Stolarz": "752205",
+            "Ślusarz": "722204",
+            "Tapicer": "753402",
+            "": "N/A"
         }
         # return zawody_dict[specjalnosc]
         return zawody_dict.get(specjalnosc, 'N/A')
@@ -404,8 +494,15 @@ class App:
         folder_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '..', 'Data', 'Wykazy'))
         
+        # files_to_convert = os.listdir(folder_path)
+        # total_files_wykazy = len(files_to_convert)
+
+
         files_to_convert = os.listdir(folder_path)
-        total_files_wykazy = len(files_to_convert)
+        total_files_wykazy = sum(1 for file_name in files_to_convert if os.path.isfile(os.path.join(folder_path, file_name)))
+
+
+
         files_processed = 0
 
         self.btn_utworz_wykaz_pdf.configure(text=f"PDF: {str(total_files_wykazy)} plików")
@@ -499,8 +596,20 @@ class App:
             folder_path_skierowania = os.path.abspath(os.path.join(
                 os.path.dirname(__file__), '..', 'Data', 'Skierowania'))
             
+            
+            # Zliczanie plikó i folderów w folderze Skierowania
+            # files_to_convert_skierowania = os.listdir(folder_path_skierowania)
+            # total_files_skierowania = len(files_to_convert_skierowania)
+
+
+            # Zliczanie tylko plików
             files_to_convert_skierowania = os.listdir(folder_path_skierowania)
-            total_files_skierowania = len(files_to_convert_skierowania)
+            total_files_skierowania = sum(1 for file_name in files_to_convert_skierowania if os.path.isfile(os.path.join(folder_path_skierowania, file_name)))
+
+
+
+
+
             files_processed = 0
 
             self.btn_utworz_skierowania_pdf.configure(text=f"PDF: {str(total_files_skierowania)} plików")

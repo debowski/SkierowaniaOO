@@ -1,0 +1,270 @@
+Administrator produkcji filmowej i telewizyjnej (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)	343919
+Animator rynku książki (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)	343305
+Asystent kierownika produkcji filmowej i telewizyjnej	343902
+Asystent osoby niepełnosprawnej	341201
+Asystentka stomatologiczna	325101
+Automatyk	731107
+Betoniarz-zbrojarz	711402
+Blacharz	721301
+Blacharz samochodowy	721306
+Cieśla	711501
+Cukiernik	751201
+Dekarz	712101
+Drukarz fleksograficzny	732209
+Drukarz offsetowy	732210
+Elektromechanik	741201
+Elektromechanik pojazdów samochodowych	741203
+Elektronik	742117
+Elektryk	741103
+Florysta	343203
+Fotograf	343101
+Fryzjer	514101
+Garbarz skór	753501
+Górnik eksploatacji otworowej	811301
+Górnik eksploatacji podziemnej	811101
+Górnik odkrywkowej eksploatacji złóż	811102
+Górnik podziemnej eksploatacji kopalin innych niż węgiel kamienny	811112
+Higienistka stomatologiczna	325102
+Jeździec	516408
+Kaletnik	753702
+Kamieniarz	711301
+Kelner	513101
+Kierowca mechanik	832201
+Kominiarz	713303
+Koszykarz-plecionkarz	731702
+Kowal	722101
+Krawiec	753105
+Kucharz	512001
+Kuśnierz	753106
+Lakiernik samochodowy	713203
+Magazynier-logistyk	432106
+Mechanik motocyklowy	723107
+Mechanik pojazdów kolejowych (Opracowano na podstawie dokumentu z dnia 9 kwietnia 2020 r.)
+	723318
+Mechanik pojazdów samochodowych	723103
+Mechanik precyzyjny	731103
+Mechanik-monter maszyn i urządzeń	723310
+Mechanik-operator maszyn do produkcji drzewnej	817212
+Mechanik-operator pojazdów i maszyn rolniczych	834103
+Mechatronik	742118
+Modelarz odlewniczy	721104
+Monter budownictwa wodnego	711701
+Monter izolacji budowlanych	712401
+Monter izolacji przemysłowych	712403
+Monter jachtów i łodzi	711505
+Monter kadłubów jednostek pływających	721406
+Monter konstrukcji budowlanych	711102
+Monter konstrukcji targowo-wystawienniczych (Wprowadzono na podstawie rozporządzenia 26 stycznia 2022 r.)
+	711906
+Monter nawierzchni kolejowej	711603
+Monter sieci i instalacji sanitarnych	712618
+Monter sieci i urządzeń telekomunikacyjnych	742202
+Monter stolarki budowlanej	712906
+Monter systemów rurociągowych	712613
+Monter zabudowy i robót wykończeniowych w budownictwie	712905
+Murarz-tynkarz	711204
+Obuwnik	753602
+Ogrodnik	611303
+Operator maszyn i urządzeń do przetwórstwa tworzyw sztucznych	814209
+Operator maszyn i urządzeń do robót ziemnych i drogowych	834209
+Operator maszyn i urządzeń odlewniczych	812107
+Operator maszyn i urządzeń przemysłu drzewnego (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)	817213
+Operator maszyn i urządzeń przemysłu metalurgicznego	812122
+Operator maszyn i urządzeń przemysłu spożywczego	816003
+Operator maszyn i urządzeń przeróbczych	811205
+Operator maszyn i urządzeń w gospodarce odpadami (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)	313211
+Operator maszyn leśnych	834105
+Operator maszyn w przemyśle włókienniczym	815204
+Operator obrabiarek skrawających	722307
+Operator procesów introligatorskich	732305
+Operator urządzeń przemysłu ceramicznego	818115
+Operator urządzeń przemysłu chemicznego	813134
+Operator urządzeń przemysłu szklarskiego	818116
+Opiekun medyczny	532102
+Opiekun osoby starszej	341202
+Opiekun w domu pomocy społecznej	341203
+Opiekunka dziecięca	325905
+Opiekunka środowiskowa	341204
+Optyk-mechanik	731104
+Ortoptystka	325906
+Piekarz	751204
+Podolog
+(opracowano na podstawie dokumentu z dnia 18 czerwca 2021 r.)	323014
+Pracownik obsługi hotelowej	962907
+Pracownik pomocniczy fryzjera	932920
+Pracownik pomocniczy gastronomii	941203
+Pracownik pomocniczy krawca	932915
+Pracownik pomocniczy mechanika	932916
+Pracownik pomocniczy obsługi hotelowej	911205
+Pracownik pomocniczy stolarza	932918
+Pracownik pomocniczy ślusarza	932917
+Pracownik pomocniczy w gospodarce odpadami (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)	932922
+Protetyk słuchu	321401
+Przetwórca mięsa	751108
+Przetwórca ryb	751103
+Pszczelarz	612302
+Rękodzielnik wyrobów włókienniczych	731808
+Rolnik	613003
+Rybak śródlądowy	622201
+Sprzedawca	522301
+Stolarz	752205
+Ślusarz	722204
+Tapicer	753402
+Technik administracji	334306
+Technik agrobiznesu	331402
+Technik analityk	311103
+Technik animacji filmowej (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)	343920
+Technik aranżacji wnętrz (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)	311224
+Technik architektury krajobrazu	314202
+Technik archiwista	441403
+Technik automatyk	311909
+Technik automatyki sterowania ruchem kolejowym	311407
+Technik awionik	315316
+Technik bezpieczeństwa i higieny pracy	325509
+Technik budownictwa kolejowego	311220
+Technik budownictwa na podbudowie kwalifikacji BUD.01.	311204
+Technik budownictwa na podbudowie kwalifikacji BUD.08.	311204
+Technik budownictwa na podbudowie kwalifikacji BUD.14.	311204
+Technik budownictwa wodnego	311205
+Technik budowy dróg	311216
+Technik budowy i strojenia fortepianów i pianin	311945
+Technik budowy jednostek pływających	311942
+Technik ceramik na podbudowie kwalifikacji CES.01.	311944
+Technik ceramik na podbudowie kwalifikacji CES.05. (Opracowano na podstawie dokumentu z dnia 9 kwietnia 2020 r.)
+	311944
+Technik chłodnictwa i klimatyzacji	311929
+Technik dekarstwa	311221
+Technik dentystyczny	321402
+Technik ekonomista	331403
+Technik eksploatacji portów i terminali	333106
+Technik elektroautomatyk okrętowy (Wprowadzono na podstawie rozporządzenia 26 stycznia 2022 r.)
+	315106
+Technik elektroenergetyk transportu szynowego	311302
+Technik elektronik	311408
+Technik elektroniki i informatyki medycznej	311411
+Technik elektroradiolog	321103
+Technik elektryk	311303
+Technik energetyk	311307
+Technik farmaceutyczny	321301
+Technik fotografii i multimediów	343105
+Technik garbarz	311912
+Technik gazownictwa	311913
+Technik geodeta	311104
+Technik geolog	311106
+Technik gospodarki odpadami (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)	325515
+Technik górnictwa odkrywkowego	311701
+Technik górnictwa otworowego	311702
+Technik górnictwa podziemnego	311703
+Technik grafiki i poligrafii cyfrowej	311943
+Technik handlowiec	522305
+Technik hodowca koni z kwalifikacją ROL.01.	314203
+Technik hodowca koni z kwalifikacją ROL.07.	314203
+Technik hotelarstwa	422402
+Technik informatyk	351203
+Technik inżynierii sanitarnej	311218
+Technik inżynierii środowiska i melioracji	311208
+Technik izolacji przemysłowych (Wprowadzono na podstawie rozporządzenia 26 stycznia 2022 r.)
+	311608
+Technik księgarstwa z kwalifikacją HAN.03.	522306
+Technik księgarstwa z kwalifikacją PGF.10. (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)	522306
+Technik leśnik	314301
+Technik logistyk	333107
+Technik lotniskowych służb operacyjnych	315406
+Technik masażysta	325402
+Technik mechanik lotniczy	315317
+Technik mechanik na podbudowie kwalifikacji MEC.03.	311504
+Technik mechanik na podbudowie kwalifikacji MEC.05.	311504
+Technik mechanik na podbudowie kwalifikacji MEC.08.	311504
+Technik mechanik okrętowy	315105
+Technik mechanizacji rolnictwa i agrotroniki	311515
+Technik mechatronik	311410
+Technik montażu i automatyki stolarki budowlanej (Wprowadzono na podstawie rozporządzenia 26 stycznia 2022 r.)
+	311222
+Technik nawigator morski	315214
+Technik obsługi przemysłu targowo-wystawienniczego (Wprowadzono na podstawie rozporządzenia 26 stycznia 2022 r.)
+	311223
+Technik obuwnik	311916
+Technik ochrony fizycznej osób i mienia	541315
+Technik ochrony środowiska	325511
+Technik odlewnik na podbudowie kwalifikacji MTL.01.	311705
+Technik odlewnik na podbudowie kwalifikacji MTL.02.	311705
+Technik ogrodnik	314205
+Technik optyk	325302
+Technik organizacji turystyki	422104
+Technik ortopeda	321403
+Technik papiernictwa	311601
+Technik podziemnej eksploatacji kopalin innych niż węgiel kamienny	311709
+Technik pojazdów kolejowych (Opracowano na podstawie dokumentu z dnia 9 kwietnia 2020 r.)
+	311518
+Technik pojazdów samochodowych na podbudowie kwalifikacji MOT.02.	311513
+Technik pojazdów samochodowych na podbudowie kwalifikacji MOT.05.	311513
+Technik pożarnictwa	311919
+Technik prac biurowych	411004
+Technik procesów drukowania na podbudowie kwalifikacji PGF.01.	311935
+Technik procesów drukowania na podbudowie kwalifikacji PGF.02.	311935
+Technik procesów introligatorskich	311936
+Technik programista	351406
+Technik przemysłu drzewnego (Wprowadzono na podstawie rozporządzenia z dnia 18 stycznia 2023 r.)	311948
+Technik przemysłu jachtowego (Wprowadzono na podstawie rozporządzenia 26 stycznia 2022 r.)
+	311947
+Technik przemysłu metalurgicznego	311708
+Technik przemysłu mody	311941
+Technik przeróbki kopalin stałych	311706
+Technik przetwórstwa mleczarskiego	314402
+Technik pszczelarz	314206
+Technik rachunkowości	431103
+Technik realizacji nagłośnień	352124
+Technik realizacji nagrań	352123
+Technik reklamy	333907
+Technik renowacji elementów architektury	311210
+Technik robotyk
+(opracowano na podstawie dokumentu z dnia 18 czerwca 2021 r.)	311413
+Technik robót wykończeniowych w budownictwie	311219
+Technik rolnik	314207
+Technik rybactwa śródlądowego	314208
+Technik rybołówstwa morskiego	315215
+Technik spawalnictwa na podbudowie kwalifikacji MEC.03. (Opracowano na podstawie dokumentu z dnia 9 kwietnia 2020 r.)
+	311516
+Technik spawalnictwa na podbudowie kwalifikacji MEC.08.(Opracowano na podstawie dokumentu z dnia 9 kwietnia 2020 r.)
+	311516
+Technik spawalnictwa na podbudowie kwalifikacji TWO.03.(Opracowano na podstawie dokumentu z dnia 9 kwietnia 2020 r.)
+	311516
+Technik spedytor	333108
+Technik sterylizacji medycznej	321104
+Technik stylista
+opracowano na podstawie dokumentu z dnia 18 czerwca 2021 r.)	311946
+Technik szerokopasmowej komunikacji elektronicznej	311412
+Technik technologii chemicznej	311603
+Technik technologii drewna	311922
+Technik technologii szkła	311925
+Technik technologii wyrobów skórzanych na podbudowie kwalifikacji MOD.02.	311926
+Technik technologii wyrobów skórzanych na podbudowie kwalifikacji MOD.04.	311926
+Technik technologii żywności na podbudowie kwalifikacji SPC.01.	314403
+Technik technologii żywności na podbudowie kwalifikacji SPC.02.	314403
+Technik technologii żywności na podbudowie kwalifikacji SPC.03.	314403
+Technik technologii żywności na podbudowie kwalifikacji SPC.04.	314403
+Technik technologii żywności na podbudowie kwalifikacji SPC.05.	314403
+Technik teleinformatyk	351103
+Technik telekomunikacji	352203
+Technik transportu drogowego	311927
+Technik transportu kolejowego	311928
+Technik turystyki na obszarach wiejskich	515205
+Technik tyfloinformatyk	351204
+Technik urządzeń dźwigowych	311940
+Technik urządzeń i systemów energetyki odnawialnej	311930
+Technik usług fryzjerskich	514105
+Technik usług kelnerskich	513102
+Technik usług kosmetycznych	514207
+Technik usług pocztowych i finansowych	421108
+Technik weterynarii	324002
+Technik wiertnik	311707
+Technik włókienniczych wyrobów dekoracyjnych	311931
+Technik włókiennik	311932
+Technik żeglugi śródlądowej	315216
+Technik żywienia i usług gastronomicznych	343404
+Terapeuta zajęciowy	325907
+Wiertacz	811305
+Zdobnik ceramiki (Opracowano na podstawie dokumentu z dnia 9 kwietnia 2020 r.)	731609
+Zdun	711203
+Zegarmistrz	731106
+Złotnik-jubiler	731305
