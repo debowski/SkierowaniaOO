@@ -189,7 +189,7 @@ class App:
 
         # Ekstrakcja liczby z kolumny 'Dane oddziału'
         df['Oddział'] = df['Dane oddziału'].str.extract(
-            '(\d+)', expand=False).astype(int)
+            r'(\d+)', expand=False).astype(int)
 
         # Utworzenie trzech zbiorów na podstawie wartości kolumny 'Oddział'
         self.zawody1 = set(df[df['Oddział'] == 1]
