@@ -296,31 +296,6 @@ class App:
             # Jeśli użytkownik nie wybrał pliku
             print("Nie wybrano pliku.")
 
-    # def wypisanie_osob(self, event=None):
-
-    #     if self.plik == "":
-    #         self.brak_pliku()
-    #         return
-    #     else:
-
-    #         df = pd.read_excel(open(self.plik, "rb"))
-    #         filtered_df = df[df["Dane oddziału"].str.contains(self.var.get(
-    #         ), case=False) & df['Specjalność/Zawód'].str.contains(self.combobox.get(), case=False)]
-    #         tekst = ""
-    #         numer = 1
-
-    #         for linia in range(filtered_df.shape[0]):
-    #             rekord = filtered_df.iloc[linia].to_dict()
-
-    #             tekst = tekst + str(numer) + ". " + \
-    #                 rekord['Imię'] + " " + rekord['Nazwisko'] + "\n"
-
-    #             numer = numer+1
-
-    #         # wstawianie listy uczniów do ramki prawej
-    #         self.pole_tekstowe.delete(1.0, tk.END)
-    #         self.pole_tekstowe.insert(tk.END, tekst)
-
     def wypisanie_osob(self, event=None):
 
         if self.plik == "":
