@@ -11,6 +11,10 @@ from tkinter import filedialog
 import pandas as pd
 import openpyxl
 import sys
+
+from docx import Document
+from docx.shared import Inches
+
 sys.stdout.reconfigure(encoding='utf-8')
 
 
@@ -315,38 +319,19 @@ class App:
             tekst += f"{numer}. {rekord['Imię']} {rekord['Nazwisko']}\n"
             numer += 1
 
-        print(tekst)
-
-    def wypisanie_osob(self, event=None):
-
-        if self.plik == "":
-            self.brak_pliku()
-            return
-
-        wb = openpyxl.load_workbook(open(self.plik, "rb"))
-        sheet = wb.active
-
-        # Filtrowanie danych
-        filtered_data = []
-        for row in sheet.iter_rows():
-            if (self.var.get().lower() in row[8].value.lower() and
-                    self.combobox.get().lower() in row[9].value.lower()):
-                filtered_data.append(row)
-
-        # Tworzenie tekstu
-        tekst = ""
-        numer = 1
-        for row in filtered_data:
-            rekord = {
-                "Imię": row[0].value,
-                "Nazwisko": row[1].value,
-            }
-            tekst += f"{numer}. {rekord['Imię']} {rekord['Nazwisko']}\n"
-            numer += 1
-
         # Wstawianie tekstu do ramki
         self.pole_tekstowe.delete(1.0, tk.END)
         self.pole_tekstowe.insert(tk.END, tekst)
+
+    def wypisanie_osob(self, event=None):
+        if self.plik == "":
+            # Wywołaj funkcję obsługi braku pliku (zakładając, że jest zdefiniowana gdzie indziej)
+            self.brak_pliku()
+            return
+
+        filtered_data = self.filtruj_dane(
+            self.plik, self.var.get(), self.combobox.get())
+        self.wyswietl_dane(filtered_data)
 
     def brak_pliku(self):
         self.pole_tekstowe.delete(1.0, tk.END)
@@ -470,8 +455,6 @@ class App:
 
         cwd = os.getcwd()
         parent_dir = os.path.dirname(cwd)
-        print(cwd)
-        print(parent_dir)
 
         szablonWykaz = os.path.join(cwd, "Szablony", "szablon_wykaz.docx")
         tmp = os.path.join(cwd, "Szablony", "plik_tymczasowy.docx")
@@ -486,7 +469,7 @@ class App:
 
         except Exception as e:
 
-            self.wynik.configure(text=f"Nie wyczytano poprawnyc danych")
+            self.wynik.configure(text="Nie wyczytano poprawnyc danych")
             self.wynik.configure(bootstyle="danger")
 
             return  # Zakończ funkcję, gdy dane nie zostały wczytane poprawnie
