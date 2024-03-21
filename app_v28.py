@@ -405,10 +405,16 @@ class App:
         }
         # return zawody_dict[specjalnosc]
         return zawody_dict.get(specjalnosc, 'N/A')
-
+ 
     def utworz_wykaz(self):
-        szablonWykaz = "Szablony/szablon_wykaz.docx"
-        tmp = "Szablony/plik_tymczasowy.docx"
+
+        cwd = os.getcwd()
+        parent_dir = os.path.dirname(cwd)
+        print(cwd)
+        print(parent_dir)
+
+        szablonWykaz = cwd + "/" + "Szablony/szablon_wykaz.docx"
+        tmp = cwd + "/" + "Szablony/plik_tymczasowy.docx"
         # wstawianie listy uczniów na końcu dokumentu
 
         docTempl = docx.Document(szablonWykaz)
@@ -475,16 +481,16 @@ class App:
         # renderowane dokumentu (podstawianie danych ze słownika)
         szablon.render(context)
 
-        if not os.path.exists("../Data"):
-            os.mkdir("../Data")
+        if not os.path.exists(parent_dir + "\Data"):
+            os.mkdir(parent_dir + "\Data")
 
-        if not os.path.exists("../Data/Wykazy"):
-            os.mkdir("../Data/Wykazy")
+        if not os.path.exists(parent_dir+"\Data\Wykazy"):
+            os.mkdir(parent_dir + "\Data\Wykazy")
 
         # zapisywanie dokumentu
 
         szablon.save(
-            f"../Data/Wykazy/{rekord['Dane oddziału']}{rekord['Specjalność/Zawód']}.docx")
+            parent_dir + f"\Data\Wykazy\{rekord['Dane oddziału']}{rekord['Specjalność/Zawód']}.docx")
 
         # informacja zwrotna
 
@@ -508,16 +514,18 @@ class App:
         self.btn_utworz_wykaz_pdf.configure(text=f"PDF: {str(total_files_wykazy)} plików")
 
     def utworz_wykaz_pdf(self):
+        cwd = os.getcwd()
+        parent_dir = os.path.dirname(cwd)
         folder_path = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), '..', 'Data', 'Wykazy'))
-
-
+            os.path.dirname(__file__), parent_dir, 'Data', 'Wykazy'))
 
         convert(folder_path)
 
     def utworz_skierowania(self):
-        szablon = "Szablony/szablon_skierowanie.docx"
-        # tmp = "Szablony/output1.docx"
+        cwd = os.getcwd()
+        parent_dir = os.path.dirname(cwd)
+
+        szablon = os.path.join(cwd, "Szablony", "szablon_skierowanie.docx")
 
         # Otwórz plik xlsx
 
@@ -539,15 +547,6 @@ class App:
             # Tutaj możesz dodać obsługę braku danych, np. wyświetlić komunikat użytkownikowi
             return  # Zakończ funkcję, gdy brak danych        
         
-        
-        
-        # df['Data urodzenia'] = pd.to_datetime(
-        #     df['Data urodzenia']).dt.strftime('%d.%m.%Y')
-
-
-
-
-
 
 
         filtered_df = df[df["Dane oddziału"].str.contains(self.var.get(
@@ -578,15 +577,21 @@ class App:
             # renderowane dokumentu (podstawianie danych ze słownika)
             doc.render(context)
 
-            if not os.path.exists("../Data"):
-                os.mkdir("../Data")
 
-            if not os.path.exists("../Data/Skierowania"):
-                os.mkdir("../Data/Skierowania")
+            ##########os.path.join(parent_dir, 'Data')
+
+            if not os.path.exists(os.path.join(parent_dir, 'Data')):
+                os.mkdir(os.path.join(parent_dir, 'Data'))
+
+            if not os.path.exists(os.path.join(parent_dir, 'Data', 'Skierowania')):
+                os.mkdir(os.path.join(parent_dir, 'Data', 'Skierowania'))
 
             # zapisywanie dokumentu
-            doc.save("../Data/Skierowania/"+rekord['Dane oddziału']+rekord['Specjalność/Zawód'] +
-                     rekord['Imię']+rekord['Nazwisko'] + ".docx")
+            # doc.save(parent_dir + "\\Data\\Skierowania\\"+rekord['Dane oddziału']+rekord['Specjalność/Zawód'] +
+            #          rekord['Imię']+rekord['Nazwisko'] + ".docx")
+
+            doc.save(os.path.join(parent_dir, 'Data', 'Skierowania', rekord['Dane oddziału']+rekord['Specjalność/Zawód']+rekord['Imię']+rekord['Nazwisko'] + ".docx"))
+
 
             # informacja zwrotna
             self.wynik.configure(
@@ -594,7 +599,7 @@ class App:
             
             #Ustawienie napisu na przycisku do generowania pdf
             folder_path_skierowania = os.path.abspath(os.path.join(
-                os.path.dirname(__file__), '..', 'Data', 'Skierowania'))
+                os.path.dirname(__file__), parent_dir, 'Data', 'Skierowania'))
             
             
             # Zliczanie plikó i folderów w folderze Skierowania
@@ -606,27 +611,34 @@ class App:
             files_to_convert_skierowania = os.listdir(folder_path_skierowania)
             total_files_skierowania = sum(1 for file_name in files_to_convert_skierowania if os.path.isfile(os.path.join(folder_path_skierowania, file_name)))
 
-
-
-
-
             files_processed = 0
 
             self.btn_utworz_skierowania_pdf.configure(text=f"PDF: {str(total_files_skierowania)} plików")
 
     def utworz_skierowania_pdf(self):
+        cwd = os.getcwd()
+        parent_dir = os.path.dirname(cwd)
+
+        
         folder_path = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), '..', 'Data', 'Skierowania'))
+            os.path.dirname(__file__), parent_dir, 'Data', 'Skierowania'))
         convert(folder_path)
 
     def otworz_folder_wykaz(self):
+        cwd = os.getcwd()
+        parent_dir = os.path.dirname(cwd)
+
         folder_path = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), '..', 'Data', 'Wykazy'))
+            os.path.dirname(__file__), parent_dir, 'Data', 'Wykazy'))
         subprocess.Popen(f'explorer "{folder_path}"')
 
     def otworz_folder_skierowania(self):
+        cwd = os.getcwd()
+        parent_dir = os.path.dirname(cwd)
+        print(cwd)
+        print(parent_dir)
         folder_path = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), '..', 'Data', 'Skierowania'))
+            os.path.dirname(__file__), parent_dir, 'Data', 'Skierowania'))
         subprocess.Popen(f'explorer "{folder_path}"')
 
     def credits(self):
