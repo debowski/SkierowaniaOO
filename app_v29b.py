@@ -6,6 +6,9 @@ import ttkbootstrap as ttkb
 from tkinter import StringVar
 from tkinter import filedialog
 import pandas as pd
+import openpyxl
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 from docxtpl import DocxTemplate
 import docx
 from docx2pdf import convert
@@ -184,36 +187,68 @@ class App:
         self.wypisanie_osob()
 
     def utworz_lz(self):
-        df = pd.read_excel(self.plik)
-        # print(df.head)
+        # df = pd.read_excel(self.plik)
+        # # print(df.head)
 
-        # Ekstrakcja liczby z kolumny 'Dane oddziału'
-        df['Oddział'] = df['Dane oddziału'].str.extract(
-            r'(\d+)', expand=False).astype(int)
+        # # Ekstrakcja liczby z kolumny 'Dane oddziału'
+        # df['Oddział'] = df['Dane oddziału'].str.extract(
+        #     r'(\d+)', expand=False).astype(int)
 
-        # Utworzenie trzech zbiorów na podstawie wartości kolumny 'Oddział'
-        self.zawody1 = set(df[df['Oddział'] == 1]
-                           ['Specjalność/Zawód'].tolist())
-        self.zawody2 = set(df[df['Oddział'] == 2]
-                           ['Specjalność/Zawód'].tolist())
-        self.zawody3 = set(df[df['Oddział'] == 3]
-                           ['Specjalność/Zawód'].tolist())
+        # # Utworzenie trzech zbiorów na podstawie wartości kolumny 'Oddział'
+        # self.zawody1 = set(df[df['Oddział'] == 1]
+        #                    ['Specjalność/Zawód'].tolist())
+        # self.zawody2 = set(df[df['Oddział'] == 2]
+        #                    ['Specjalność/Zawód'].tolist())
+        # self.zawody3 = set(df[df['Oddział'] == 3]
+        #                    ['Specjalność/Zawód'].tolist())
+
+        wb = openpyxl.load_workbook(self.plik)
+        sheet = wb.active
+
+        self.zawody1 = set()
+        self.zawody2 = set()
+        self.zawody3 = set()
+
+        for row in sheet.iter_rows():
+            klasa = row[8].value.split()[0][0]
+            zawod = row[9].value
+
+            if klasa == "1":
+                self.zawody1.add(zawod)
+            elif klasa == "2":
+                self.zawody2.add(zawod)
+            elif klasa == "3":
+                self.zawody3.add(zawod)
+
+
+
 
     # Funkcja sprawdzająca strukturę kolumn w pliku xlsx
     def check_columns(self, file_path):
         expected_columns = ['PESEL', 'Data urodzenia', 'Specjalność/Zawód', 'Miejsce urodzenia', 'Imię', 'Dane oddziału', 'Nazwisko']
 
         try:
-            df = pd.read_excel(file_path)
-            columns = df.columns.tolist()
+            wb = openpyxl.load_workbook(file_path)
+            sheet = wb.active
+
+            # Pobierz pierwszy wiersz
+            first_row = sheet.iter_rows(min_row=1, max_row=1)
+
+            # Utwórz listę nazw kolumn
+            columns = []
+
+            for cell_tuple in first_row:
+                for cell in cell_tuple:
+                    if cell.value is not None:
+                        columns.append(cell.value)
+
+            # print(cell.value)
 
             if set(expected_columns).issubset(set(columns)):
                 print("Plik ma poprawną strukturę kolumn.") 
                 self.btn_wyb_plik.configure(bootstyle="success")                 
                 self.btn_utworz_wykaz.configure(state="normal")
                 self.btn_utworz_skierowania.configure(state="normal")
-
-
 
                 return True
             else:
@@ -224,8 +259,6 @@ class App:
                 self.btn_utworz_skierowania.configure(state="disabled")
 
                 print("Plik nie zawiera wszystkich oczekiwanych kolumn.")
-
-
 
                 return False
 
@@ -263,30 +296,64 @@ class App:
             # Jeśli użytkownik nie wybrał pliku
             print("Nie wybrano pliku.")
 
+    # def wypisanie_osob(self, event=None):
+
+    #     if self.plik == "":
+    #         self.brak_pliku()
+    #         return
+    #     else:
+
+    #         df = pd.read_excel(open(self.plik, "rb"))
+    #         filtered_df = df[df["Dane oddziału"].str.contains(self.var.get(
+    #         ), case=False) & df['Specjalność/Zawód'].str.contains(self.combobox.get(), case=False)]
+    #         tekst = ""
+    #         numer = 1
+
+    #         for linia in range(filtered_df.shape[0]):
+    #             rekord = filtered_df.iloc[linia].to_dict()
+
+    #             tekst = tekst + str(numer) + ". " + \
+    #                 rekord['Imię'] + " " + rekord['Nazwisko'] + "\n"
+
+    #             numer = numer+1
+
+    #         # wstawianie listy uczniów do ramki prawej
+    #         self.pole_tekstowe.delete(1.0, tk.END)
+    #         self.pole_tekstowe.insert(tk.END, tekst)
+
     def wypisanie_osob(self, event=None):
 
         if self.plik == "":
             self.brak_pliku()
             return
-        else:
 
-            df = pd.read_excel(open(self.plik, "rb"))
-            filtered_df = df[df["Dane oddziału"].str.contains(self.var.get(
-            ), case=False) & df['Specjalność/Zawód'].str.contains(self.combobox.get(), case=False)]
-            tekst = ""
-            numer = 1
+        wb = openpyxl.load_workbook(open(self.plik, "rb"))
+        sheet = wb.active
 
-            for linia in range(filtered_df.shape[0]):
-                rekord = filtered_df.iloc[linia].to_dict()
+        # Filtrowanie danych
+        filtered_data = []
 
-                tekst = tekst + str(numer) + ". " + \
-                    rekord['Imię'] + " " + rekord['Nazwisko'] + "\n"
+        filtered_data = []
+        for row in sheet.iter_rows():
+            if (self.var.get().lower() in row[8].value.lower() and
+                    self.combobox.get().lower() in row[9].value.lower()):
+                        filtered_data.append(row)
 
-                numer = numer+1
+        # Tworzenie tekstu
+        tekst = ""
+        numer = 1
+        for row in filtered_data:
+            rekord = {
+                "Imię": row[0].value,
+                "Nazwisko": row[1].value,
+            }
+            tekst += f"{numer}. {rekord['Imię']} {rekord['Nazwisko']}\n"
+            numer += 1
 
-            # wstawianie listy uczniów do ramki prawej
-            self.pole_tekstowe.delete(1.0, tk.END)
-            self.pole_tekstowe.insert(tk.END, tekst)
+        # Wstawianie tekstu do ramki
+        self.pole_tekstowe.delete(1.0, tk.END)
+        self.pole_tekstowe.insert(tk.END, tekst)
+
 
     def brak_pliku(self):
         self.pole_tekstowe.delete(1.0, tk.END)
@@ -413,9 +480,6 @@ class App:
         print(cwd)
         print(parent_dir)
 
-        # szablonWykaz = cwd + "/" + "Szablony/szablon_wykaz.docx"
-        # tmp = cwd + "/" + "Szablony/plik_tymczasowy.docx"
-
         szablonWykaz = os.path.join(cwd, "Szablony", "szablon_wykaz.docx")
         tmp = os.path.join(cwd, "Szablony", "plik_tymczasowy.docx")
 
@@ -485,21 +549,10 @@ class App:
         # renderowane dokumentu (podstawianie danych ze słownika)
         szablon.render(context)
 
-###################
-        # if not os.path.exists(parent_dir + "\Data"):
-        #     os.mkdir(parent_dir + "\Data")
-
         if not os.path.exists(os.path.join(parent_dir, 'Data')):
             os.mkdir(os.path.join(parent_dir, 'Data'))
-
-
-##################
-        # if not os.path.exists(parent_dir+"\Data\Wykazy"):
-        #     os.mkdir(parent_dir + "\Data\Wykazy")
-
         if not os.path.exists(os.path.join(parent_dir, 'Data', 'Wykazy')):
             os.mkdir(os.path.join(parent_dir, 'Data', 'Wykazy'))
-
 
         # zapisywanie dokumentu
 
@@ -514,16 +567,9 @@ class App:
         folder_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), parent_dir, 'Data', 'Wykazy'))
         
-        # files_to_convert = os.listdir(folder_path)
-        # total_files_wykazy = len(files_to_convert)
-
-
         files_to_convert = os.listdir(folder_path)
         total_files_wykazy = sum(1 for file_name in files_to_convert if os.path.isfile(os.path.join(folder_path, file_name)))
 
-
-
-        files_processed = 0
 
         self.btn_utworz_wykaz_pdf.configure(text=f"PDF: {str(total_files_wykazy)} plików")
 
