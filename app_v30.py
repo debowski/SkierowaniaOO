@@ -8,12 +8,9 @@ import tkinter.ttk as ttk
 import ttkbootstrap as ttkb
 from tkinter import StringVar
 from tkinter import filedialog
-import pandas as pd
 import openpyxl
 import sys
-
 from docx import Document
-from docx.shared import Inches
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -22,7 +19,7 @@ class App:
 
     def __init__(self):
         self.root = ttkb.Window(themename="darkly")
-        self.root.title("Skierowania 0.29c")
+        self.root.title("Skierowania 0.30")
         self.root.grid()
         self.root.columnconfigure(0, weight=0, minsize=500)
         self.root.columnconfigure(1, weight=1, minsize=400)
@@ -224,8 +221,6 @@ class App:
             elif klasa == "3":
                 self.zawody3.add(zawod)
 
-    # Funkcja sprawdzająca strukturę kolumn w pliku xlsx
-
     def check_columns(self, file_path):
         expected_columns = ['PESEL', 'Data urodzenia', 'Specjalność/Zawód',
                             'Miejsce urodzenia', 'Imię', 'Dane oddziału', 'Nazwisko']
@@ -305,10 +300,7 @@ class App:
             if (var.lower() in row[8].value.lower() and
                     combobox.lower() in row[9].value.lower()):
                 filtered_data.append(row)
-
-        
-        print(filtered_data[0][2].value)
-        
+      
         return filtered_data
 
     def wyswietl_dane(self, filtered_data):
@@ -454,107 +446,6 @@ class App:
         # return zawody_dict[specjalnosc]
         return zawody_dict.get(specjalnosc, 'N/A')
 
-
-    # def utworz_wykaz(self):
-
-    #     cwd = os.getcwd()
-    #     parent_dir = os.path.dirname(cwd)
-
-    #     szablonWykaz = os.path.join(cwd, "Szablony", "szablon_wykaz.docx")
-    #     tmp = os.path.join(cwd, "Szablony", "plik_tymczasowy.docx")
-
-    #     # wstawianie listy uczniów na końcu dokumentu
-
-    #     docTempl = docx.Document(szablonWykaz)
-
-    #     try:
-    #         dfw = pd.read_excel(open(self.plik, "rb"), dtype={'PESEL': str})
-    #         self.wynik.configure(bootstyle="success")
-
-    #     except Exception as e:
-
-    #         self.wynik.configure(text="Nie wyczytano poprawnyc danych")
-    #         self.wynik.configure(bootstyle="danger")
-
-    #         return  # Zakończ funkcję, gdy dane nie zostały wczytane poprawnie
-
-    #     if dfw.empty:
-    #         print("Plik nie zawiera danych.")
-    #         # Tutaj możesz dodać obsługę braku danych, np. wyświetlić komunikat użytkownikowi
-    #         return  # Zakończ funkcję, gdy brak danych
-
-    #     filtered_dfw = dfw[dfw["Dane oddziału"].str.contains(self.var.get(
-    #     ), case=False) & dfw['Specjalność/Zawód'].str.contains(self.combobox.get(), case=False)]
-
-    #     for linia in range(filtered_dfw.shape[0]):
-    #         rekord = filtered_dfw.iloc[linia].to_dict()
-    #         # new_paragraph = docTempl.add_paragraph(str(linia+1) + ". " + rekord['Imię']+ " " + rekord['Nazwisko'] )
-    #         num_of_paragraphs = len(docTempl.paragraphs)
-    #         # print(num_of_paragraphs)
-
-    #         npar = docTempl.paragraphs[num_of_paragraphs-3]
-    #         # print(npar)
-    #         npar.add_run(
-    #             (
-    #                 (
-    #                     ((f"{str(linia + 1)}. " + rekord['Imię']) + " ")
-    #                     + rekord['Nazwisko']
-    #                 )
-    #                 + "\n"
-    #             )
-    #         )
-
-    #     if os.path.exists(tmp):
-    #         os.remove(tmp)
-    #     docTempl.save(tmp)
-
-    #     # wstawienie danych do szablonu wykazu uczniów
-
-    #     szablon = DocxTemplate(tmp)
-    #     rekord = filtered_dfw.iloc[linia].to_dict()
-    #     context = {'dataWyst': self.data_wystawienia.entry.get(),
-    #                'imię': rekord['Imię'],
-    #                'nazwisko': rekord['Nazwisko'],
-    #                'dataUrodzenia': rekord['Data urodzenia'],
-    #                'miejsceUrodzenia': rekord['Miejsce urodzenia'],
-    #                'PESEL': rekord['PESEL'],
-    #                'zawod': self.combobox.get(),
-    #                'kodZawodu': self.symbolZawodu(self.combobox.get()),
-    #                'dataRozp': self.data_rozpoczecia.entry.get(),
-    #                'dataZako': self.data_zakonczenia.entry.get(),
-    #                'godzRozp': self.godzina_rozpoczecia.get()+":"+self.minuty_rozpoczecia.get(),
-    #                'stopien': self.var.get()
-    #                }
-
-    #     # renderowane dokumentu (podstawianie danych ze słownika)
-    #     szablon.render(context)
-
-    #     if not os.path.exists(os.path.join(parent_dir, 'Data')):
-    #         os.mkdir(os.path.join(parent_dir, 'Data'))
-    #     if not os.path.exists(os.path.join(parent_dir, 'Data', 'Wykazy')):
-    #         os.mkdir(os.path.join(parent_dir, 'Data', 'Wykazy'))
-
-    #     # zapisywanie dokumentu
-
-    #     szablon.save(
-    #         parent_dir + f"\Data\Wykazy\{rekord['Dane oddziału']}{rekord['Specjalność/Zawód']}.docx")
-
-    #     # informacja zwrotna
-
-    #     self.wynik.configure(text=f"utworzono: {str(linia + 1)} pozycji")
-
-    #     # Ustawienie napisu na przycisku do generowania pdf
-    #     folder_path = os.path.abspath(os.path.join(
-    #         os.path.dirname(__file__), parent_dir, 'Data', 'Wykazy'))
-
-    #     files_to_convert = os.listdir(folder_path)
-    #     total_files_wykazy = sum(1 for file_name in files_to_convert if os.path.isfile(
-    #         os.path.join(folder_path, file_name)))
-
-    #     self.btn_utworz_wykaz_pdf.configure(
-    #         text=f"PDF: {str(total_files_wykazy)} plików")
-
-
     def utworz_wykaz(self):
         cwd = os.getcwd()
         parent_dir = os.path.dirname(cwd)
@@ -614,9 +505,6 @@ class App:
         self.btn_utworz_wykaz_pdf.configure(
             text=f"PDF: {str(total_files_wykazy)} plików")
 
-
-
-
     def utworz_wykaz_pdf(self):
         cwd = os.getcwd()
         parent_dir = os.path.dirname(cwd)
@@ -626,60 +514,40 @@ class App:
         convert(folder_path)
 
     def utworz_skierowania(self):
+
         cwd = os.getcwd()
         parent_dir = os.path.dirname(cwd)
+        folder_path = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), parent_dir, 'Data', 'Skierowania'))
 
-        szablon = os.path.join(cwd, "Szablony", "szablon_skierowanie.docx")
 
-        # Otwórz plik xlsx
+        wybrane_dane = self.filtruj_dane(self.plik, self.var.get(), self.combobox.get())
 
-        try:
+        doc = DocxTemplate(os.path.join(cwd, "Szablony", "szablon_skierowanie.docx"))
 
-            # dane = openpyxl.load_workbook(open(self.plik, "rb"))
-            # sheet = dane.active
+        lista = ""
 
-            df = pd.read_excel(open(self.plik, "rb"), dtype={
-                'PESEL': str, 'Data urodzenia': str})
-            self.wynik.configure(bootstyle="success")
+        for linia in range(len(wybrane_dane)):
+            rekord = wybrane_dane[linia]
 
-        except Exception as e:
+            lista = lista + str(linia + 1) + ". " + rekord[0].value + " " + rekord[1].value + "\n"
 
-            self.wynik.configure(text=f"Nie wyczytano poprawnyc danych")
-            self.wynik.configure(bootstyle="danger")
-
-            return  # Zakończ funkcję, gdy dane nie zostały wczytane poprawnie
-
-        if df.empty:
-            print("Plik nie zawiera danych.")
-            # Tutaj możesz dodać obsługę braku danych, np. wyświetlić komunikat użytkownikowi
-            return  # Zakończ funkcję, gdy brak danych
-
-        filtered_df = df[df["Dane oddziału"].str.contains(self.var.get(
-        ), case=False) & df['Specjalność/Zawód'].str.contains(self.combobox.get(), case=False)]
-
-        # .shape zwraca tupla wiersze, kolumny
-        for linia in range(filtered_df.shape[0]):
-            rekord = filtered_df.iloc[linia].to_dict()
-
-            doc = DocxTemplate(szablon)
-
-            context = {'dataWyst': self.data_wystawienia.entry.get(),
-                        'imię': rekord['Imię'],
-                        'nazwisko': rekord['Nazwisko'],
-                        'dataUrodzenia': rekord['Data urodzenia'],
-                        'miejsceUrodzenia': rekord['Miejsce urodzenia'],
-                        'PESEL': rekord['PESEL'],
+            context = {
+                        'dataWyst': self.data_wystawienia.entry.get(),
+                        'imię': rekord[0].value,
+                        'nazwisko': rekord[1].value,
+                        'dataUrodzenia': rekord[2].value,
+                        'miejsceUrodzenia': rekord[3].value,
+                        'PESEL': rekord[4].value,
                         'zawod': self.combobox.get(),
                         'kodZawodu': self.symbolZawodu(self.combobox.get()),
                         'dataRozp': self.data_rozpoczecia.entry.get(),
                         'dataZako': self.data_zakonczenia.entry.get(),
                         'godzRozp': self.godzina_rozpoczecia.get()+":"+self.minuty_rozpoczecia.get(),
-                        'stopien': self.var.get()
+                        'stopien': self.var.get(),
+                        'tabela': lista
                         }
 
-            # print(context)
-
-            # renderowane dokumentu (podstawianie danych ze słownika)
             doc.render(context)
 
             # os.path.join(parent_dir, 'Data')
@@ -690,34 +558,26 @@ class App:
             if not os.path.exists(os.path.join(parent_dir, 'Data', 'Skierowania')):
                 os.mkdir(os.path.join(parent_dir, 'Data', 'Skierowania'))
 
-            # zapisywanie dokumentu
-            # doc.save(parent_dir + "\\Data\\Skierowania\\"+rekord['Dane oddziału']+rekord['Specjalność/Zawód'] +
-            #          rekord['Imię']+rekord['Nazwisko'] + ".docx")
+            doc.save(os.path.join(parent_dir, 'Data', 'Skierowania', f"{context['stopien']}_{context['zawod']}{context['imię']}{context['nazwisko']}.docx"))
+            
+        # informacja zwrotna
+        self.wynik.configure(
+            text=f"utworzono: {str(linia + 1)} dokumentów")
 
-            doc.save(os.path.join(parent_dir, 'Data', 'Skierowania',
-                        rekord['Dane oddziału']+rekord['Specjalność/Zawód']+rekord['Imię']+rekord['Nazwisko'] + ".docx"))
+        # Ustawienie napisu na przycisku do generowania pdf
+        folder_path_skierowania = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), parent_dir, 'Data', 'Skierowania'))
 
-            # informacja zwrotna
-            self.wynik.configure(
-                text=f"utworzono: {str(linia + 1)} dokumentów")
+        # Zliczanie plikó i folderów w folderze Skierowania
 
-            # Ustawienie napisu na przycisku do generowania pdf
-            folder_path_skierowania = os.path.abspath(os.path.join(
-                os.path.dirname(__file__), parent_dir, 'Data', 'Skierowania'))
 
-            # Zliczanie plikó i folderów w folderze Skierowania
-            # files_to_convert_skierowania = os.listdir(folder_path_skierowania)
-            # total_files_skierowania = len(files_to_convert_skierowania)
+        # Zliczanie tylko plików
+        files_to_convert_skierowania = os.listdir(folder_path_skierowania)
+        total_files_skierowania = sum(1 for file_name in files_to_convert_skierowania if os.path.isfile(
+            os.path.join(folder_path_skierowania, file_name)))
 
-            # Zliczanie tylko plików
-            files_to_convert_skierowania = os.listdir(folder_path_skierowania)
-            total_files_skierowania = sum(1 for file_name in files_to_convert_skierowania if os.path.isfile(
-                os.path.join(folder_path_skierowania, file_name)))
-
-            files_processed = 0
-
-            self.btn_utworz_skierowania_pdf.configure(
-                text=f"PDF: {str(total_files_skierowania)} plików")
+        self.btn_utworz_skierowania_pdf.configure(
+            text=f"PDF: {str(total_files_skierowania)} plików")
 
     def utworz_skierowania_pdf(self):
         cwd = os.getcwd()
@@ -747,7 +607,7 @@ class App:
     def credits(self):
         self.pole_tekstowe.delete(1.0, tk.END)
         self.pole_tekstowe.insert(
-            tk.END, "Autor: Piotr Dębowski\nZespół Szkół Energetycznych i Usługowych w Łaziskch Górnych\n\nWersja 0.28\n\n")
+            tk.END, "Autor: Piotr Dębowski\nZespół Szkół Energetycznych i Usługowych w Łaziskch Górnych\n\nWersja 0.30\n\n")
 
 
 if __name__ == "__main__":
